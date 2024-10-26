@@ -24,10 +24,15 @@ function App() {
       setMsg(data); // Ustawienie wiadomości w stanie, aby wyświetlić w UI
     });
 
+    socket.on('temperature_update', (data) => {
+      console.log('Otrzymano probke temperatury:', data);
+    });
+
     // Czyszczenie socketu po odłączeniu komponentu
     return () => {
       socket.off('connect');
       socket.off('message');
+      socket.off('temperature_update');
     };
   }, []);
 
